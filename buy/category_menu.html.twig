@@ -1,0 +1,13 @@
+<div id="category">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <ul>
+        <li><a href="{{constant('buy\\Bootstrap::ENTRY_URL')}}list.php">全て</a></li> 
+        {% for value in cateArr %}
+            <li><a href="{{constant('buy\\Bootstrap::ENTRY_URL')}}list.php?ctg_id={{value.ctg_id}}">{{value.category_name}}</a></li>     
+        {% endfor %} 
+        <h4 class="">地域</h4>
+        {% for value1 in areacateArr %}
+            <li><a href="{{constant('buy\\Bootstrap::ENTRY_URL')}}list.php?area_id={{value1.area_id}}">{{value1.area_category_name}}</a></li>     
+        {% endfor %}                 
+    </ul>   
+</div>        

@@ -1,0 +1,42 @@
+<!--
+*ファイルパス:C:\xampp\htdocs\DT\member\confirm.html.twig
+*ファイル名:confirm.html.twig
+*アクセスURL:http://localhost/DT/member/confirm.html.twig
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ログイン</title>
+    </head>
+    <body>
+        <form method="post" action="confirm.php">
+            <table>
+                <tr>
+                    <th>ユーザID</th> 
+                    <td>{{dataArr.username}} </td>
+                </tr>
+                <tr>
+                    <th>パスワード</th> 
+                    <td>{{dataArr.password}}</td>
+                </tr> 
+            </table>
+            <div>
+                <input type="submit" name="back" value="戻る">
+                <input type="submit" name="complete" value="ログイン">
+                {% for key, value in dataArr %}
+                    <!--↓下記メソッドで配列か否かをチェックしている -->
+                    {% if value is iterable %}
+                        {% for v in value %}
+                            <input type="hidden" name="{{key}}[]" value="{{v}}">
+                        {% endfor %}
+                    {% else %}
+                            <input type="hidden" name="{{key}}" value="{{value}}">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </form>
+    </body> 
+</html>               
+

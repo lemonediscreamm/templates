@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>お問い合わせ</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="style1.css" rel="stylesheet"> 
+</head>
+<body>
+<div class="container">
+    <h2 class="">お問い合わせフォーム</h2>
+    {% if result == 1 %}
+    <h4>送信完了!</h4>
+    <p>送信完了いたしました。</p>
+    <hr>
+    {% else %}
+    <h4>送信失敗</h4>
+    <p>申し訳ございませんが、送信に失敗しました。</p>
+    <p>しばらくしてもう一度お試しになるか、メールにてご連絡ください。</p>
+    <p>メール：<a href="mailto:info@example.com">Contact</a></p>
+    <hr>
+    {% endif %}
+    <p><button type="button" onclick='location.href="http://localhost/DT/buy/list.php"'>一覧戻る</button>
+  </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>掲示板_DB_Smarty版</title>
+        <h2 class="">{{item_name}}の口コミ</h2>
+    </head>
+    <body>
+        <form method="post" action="">
+        <input name="chkno" type="hidden" value={{chkno}}>
+        <input name="item_id" type="hidden" value={{item_id}}>
+        {{value.id}}
+            <table>
+                <tr>
+                    <th>名前</th>
+                    <td><input type="text" name="name" value=""></td>
+                </tr>
+                <tr>
+                    <th>件名</th>
+                    <td><input type="text" name="subject" value=""></td>
+                </tr>                
+                <tr>
+                    <th>コメント</th>
+                    <td><textarea name="contents" rows="4" cols="20"></textarea></td>
+                </tr>
+                <tr>
+                    <td><button type="button" onclick='location.href="http://localhost/DT/buy/list.php"'>一覧戻る</button></td>
+                    <td colspan="2"><input type="submit" name="send" value="書き込む"></td>
+                </tr>
+            </table>    
+            {% if msg | length >0 %}<p>{{msg}}</p>{% endif %}
+            {% if err_msg | length >0 %}<p style="color:#f00;">{{err_msg}}</p>{% endif %}
+            <table>
+                <tr>                
+                    <th>名前</th>
+                    <th>件名</th>
+                    <th>コメント</th>
+                </tr>
+                {% for key, value in data %}
+                    {% if value.flg == 0 %}
+                        <td>{{value.name}}</td> 
+                        <td>{{value.subject}}</td> 
+                        <td>{{value.contents|nl2br }}</td>
+                        {% if mem_id == value.mem_id %}
+                            <td><a href="{{constant('buy\\Bootstrap::ENTRY_URL')}}edit.php?id={{value.id}}">編集</a>
+                            <a href="{{constant('buy\\Bootstrap::ENTRY_URL')}}delete.php?id={{value.id}}">削除</a></td>
+                        {% endif %}
+                    {% endif %}         
+                </tr>
+                {% endfor %}
+            </table>
+        </form>   
+    </body>
+</html>
+    

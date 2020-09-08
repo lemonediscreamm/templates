@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src ="{{constant('login\\Bootstrap::APP_URL')}}js/common.js"></script>
+        <link href="{{constant('login\\Bootstrap::APP_URL')}}css/style.css"
+        rel="stylesheet">
+        <title>マイページ</title>
+    </head>
+    <body>
+        <form method="post" action="confirm.php">
+            <table>
+                <p><font size="5">マイページ</font></p>
+                <tr>
+                    <th>お名前（氏名）<span class="red">*</span></th>
+                    <td>
+                        {% if errArr.family_name | length > 0 %}
+                        <input type="text" name="family_name" value="">
+                        {% else %}
+                        <input type="text" name="family_name" value="{{dataArr[0]["family_name"]}}">
+                        {% endif %}
+                        {% if errArr.first_name | length > 0 %}
+                        <input type="text" name="first_name" value="">
+                        {% else %}
+                        <input type="text" name="first_name" value="{{dataArr[0]["first_name"]}}">
+                        {% endif %}                     
+                        {% if errArr.family_name | length > 0 %}<br><span class="red">
+                        {{ errArr.family_name }}</span>{% endif %}
+                        {% if errArr.first_name | length > 0 %}<br><span class="red">
+                        {{ errArr.first_name }}</span>{% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>お名前（かな）</th>    
+                    <td>
+                        {% if errArr.family_name_kana | length > 0 %}
+                        <input type="text" name="family_name_kana" value="">
+                        {% else %}
+                        <input type="text" name="family_name_kana" value="{{dataArr[0]["family_name_kana"]}}">
+                        {% endif %}
+                        {% if errArr.first_name_kana | length > 0 %}
+                        <input type="text" name="first_name_kana" value="">
+                        {% else %}
+                        <input type="text" name="first_name_kana" value="{{dataArr[0]["first_name_kana"]}}">
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>性別<span class="red">*</span></th>
+                    <td>
+                        {% for index, label in sexArr %}   
+                        <input type="radio" name="sex" value= "{{index}}"
+                        id="sex_{{index}}" {% if dataArr[0]["sex"] == index %} checked="checked" {% endif %}>
+                        <label for="sex_{{index}}">{{label}}</label>
+                        {% endfor %}
+                        {% if errArr.sex | length > 0 %}<br><span
+                        class ="red">{{errArr.sex}}</span>{% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>生年月日<span class="red">*</span></th> 
+                    <td>
+                        <select name="year" >
+                        {% for index, label in yearArr %}  
+                        <option value="{{index}}" {% if dataArr[0]["year"] == index %} selected
+                        {# >{{ label }}</option> #}
+                        {% endif %}>{{ label }}</option>
+                        {% endfor %}
+                        </select>
+                        <select name='month'>
+                        {% for index, label in monthArr %}
+                        <option value="{{index}}" {% if dataArr[0]["month"] == index %} selected
+                        {# >{{ label }}</option> #}
+                        {% endif %}>{{ label }}</option>
+                        {% endfor %}
+                        </select>
+                        <select name='day'>
+                        {% for index, label in dayArr %}
+                        <option value="{{index}}" {% if dataArr[0]["day"] == index %} selected
+                        {# >{{ label }}</option> #}
+                        {% endif %}>{{ label }}</option>
+                        {% endfor %}
+                        </select>
+                        {% if errArr.year | length > 0 %}<br><span class="red">{{errArr.year}}</span>{% endif %}
+                        {% if errArr.month | length > 0 %}<br><span class="red">{{errArr.month}}</span>{% endif %}
+                        {% if errArr.day | length > 0 %}<br><span class="red">{{errArr.day}}</span>{% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>郵便番号<span class="red">*</span></th>   
+                    <td>
+                        {% if errArr.zip1 | length > 0 and errArr.zip2 | length > 0 %}
+                        <input type="text" name="zip1" value=""
+                        id="zip1" size="3" maxlength="3"> -
+                        <input type="text" name="zip2" value=""
+                        id="zip2" size="4" maxlength="4">
+                        <input type="button" name="address_search" value="〒から住所を入力"
+                        id="address_search">
+                        {% elseif errArr.zip1 | length > 0  %}
+                        <input type="text" name="zip1" value=""
+                        id="zip1" size="3" maxlength="3"> -
+                        <input type="text" name="zip2" value="{{dataArr[0]["zip2"]}}"
+                        id="zip2" size="4" maxlength="4">
+                        <input type="button" name="address_search" value="〒から住所を入力"
+                        id="address_search"> 
+                        {% elseif errArr.zip2 | length > 0 %}
+                        <input type="text" name="zip1" value="{{dataArr[0]["zip1"]}}"
+                        id="zip1" size="3" maxlength="3"> -
+                        <input type="text" name="zip2" value=""
+                        id="zip2" size="4" maxlength="4">
+                        <input type="button" name="address_search" value="〒から住所を入力"
+                        id="address_search">
+                        {% else %}
+                        <input type="text" name="zip1" value="{{dataArr[0]["zip1"]}}"
+                        id="zip1" size="3" maxlength="3"> -
+                        <input type="text" name="zip2" value="{{dataArr[0]["zip2"]}}"
+                        id="zip2" size="4" maxlength="4">
+                        <input type="button" name="address_search" value="〒から住所を入力"
+                        id="address_search">                        
+                        {% endif %}                       
+                        {% if errArr.zip1 | length > 0 %}<br><span class="red">{{errArr.zip1}} </span>{% endif %}
+                        {% if errArr.zip2 | length > 0 %}<br><span class="red">{{errArr.zip2}} </span>{% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>住所<span class="red">*</span></th>
+                    <td>
+                        {% if errArr.address | length > 0 %}
+                        <input type="text" name="address" value="" id="address" size="40"> 
+                        {% else %}
+                        <input type="text" name="address" value="{{dataArr[0]["address"]}}" id="address" size="40">
+                        {% endif %}        
+                        {% if errArr.address | length > 0 %}<br><span class="red">{{errArr.address}}</span>{% endif %}                      
+                    </td>
+                </tr>
+                <tr>    
+                    <th>電話番号<span class="red">*</span></th>
+                    <td>
+                        {% if errArr.tel1 | length > 0 or errArr.tel2 | length > 0 or errArr.tel3 | length > 0 %}
+                        <input type="text" name="tel1" value="" size="6" maxlength="6"> -
+                        <input type="text" name="tel2" value="" size="6" maxlength="6"> -
+                        <input type="text" name="tel3" value="" size="6" maxlength="6">
+                        {% else %}
+                        <input type="text" name="tel1" value="{{dataArr[0]["tel1"]}}" size="6" maxlength="6"> -
+                        <input type="text" name="tel2" value="{{dataArr[0]["tel2"]}}" size="6" maxlength="6"> -
+                        <input type="text" name="tel3" value="{{dataArr[0]["tel3"]}}" size="6" maxlength="6">
+                        {% endif %}  
+                        {% if errArr.tel1 | length > 0 %}<br><span class="red">{{errArr.tel1}}</span>{% endif %}
+                        {% if errArr.tel2 | length > 0 %}<br><span class="red">{{errArr.tel2}}</span>{% endif %}
+                        {% if errArr.tel3 | length > 0 %}<br><span class="red">{{errArr.tel3}}</span>{% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>メールアドレス<span class="red">*</span></th>        
+                    <td>
+                        {% if errArr.email | length > 0 %}
+                        <input type="text" name="email" value="" size="40">ユーザーIDになります
+                        {% else %}
+                        <input type="text" name="email" value="{{dataArr[0]["email"]}}" size="40">ユーザーIDになります
+                        {% endif %}
+                        {% if errArr.email | length > 0 %}<br><span class="red">{{errArr.email}}</span>{% endif %}
+                        {% if errmail | length > 0 %}<br><span class="red">{{errmail}}</span>{% endif %} 
+                    </td>
+                </tr>                                   
+            </table>
+            <div>
+                <button type="button" onclick='location.href="http://localhost/DT/buy/list.php"'>一覧に戻る</button>              
+                <input type="submit" name="confirm" value="変更する">次の画面で確認できます
+                <p><button type="button" onclick='location.href="http://localhost/DT/buy/leave.php"'>退会する</button></p>
+                {% for key, value in dataArr %}
+                    <!--↓下記メソッドで配列か否かをチェックしている -->
+                    {% if value is iterable %}
+                        {% for v in value %}
+                            <input type="hidden" name="{{key}}[]" value="{{v}}">
+                        {% endfor %}
+                    {% else %}
+                            <input type="hidden" name="{{key}}" value="{{value}}">
+                    {% endif %}
+                {% endfor %}
+            </div>        
+        </form>
+    </body> 
+</html>                 

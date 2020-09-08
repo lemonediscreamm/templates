@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{constant('shopping\\Bootstrap::APP_URL')}}css/shopping3.css"
+        rel="stylesheet">
+    </head>
+    <body>
+    <div style="display:inline-flex">
+    <form action="" method="get">
+    <input type="text" name="search" value="">
+    <input type="submit"value="検索">
+    {% if not session %} 
+    <a href='{{constant('shopping\\Bootstrap::APP_URL')}}login1/regist.php'>ログイン</a>
+    {% endif %}
+    {% if session %} 
+    <a href='logout.php'>ログアウト</a>
+    {% endif %}
+    </form>
+    </div>
+        <div id="wrapper">
+            {% include 'category_menu.html.twig' %}
+            <div id="item_list">
+            {% if search_bl == 1 %} 
+                {% for value in arr %}
+                    <div class="item">
+                        <ul>
+                            <li class="name"><a href="{{constant('shopping\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}">{{value.item_name}}</a></li>
+                            <li class ="price">&yen;{{value.price|number_format(0, '.', ',')}}</li>
+                            <li class = "image"><a href="{{constant('shopping\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}">
+                            <img src="{{constant('shopping\\Bootstrap::ENTRY_URL')}}images/{{value.image}}"alt="{{value.item_name}}"></a></li>
+                            <li class ="detail"><a href="{{constant('shopping\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}">詳細</a></li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for value in dataArr %}
+                    <div class="item">
+                        <ul>
+                            <li class="name"><a href="{{constant('buy\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}">{{value.item_name}}</a></li>
+                            <li class ="price">&yen;{{value.price|number_format(0, '.', ',')}}</li>
+                            <li class = "image"><a href="{{constant('buy\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}">
+                            <img src="{{constant('buy\\Bootstrap::ENTRY_URL')}}images/{{value.image}}"alt="{{value.item_name}}"></a></li>
+                            <li class ="detail"><a href="{{constant('buy\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}">詳細</a></li>
+                        </ul>
+                    </div>
+                {% endfor %}                       
+            {% endif %}        
+            </div>                                            
+        </div>
+    </body>
+</html>            
