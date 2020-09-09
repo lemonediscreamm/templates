@@ -9,44 +9,48 @@
         rel="stylesheet">
     </head>
     <body>
-        <input type="hidden" name="entry_url" 
-        value="{{constant('buy\\Bootstrap::ENTRY_URL')}}"id="entry_url">
-        <div id="wrapper">
-            {% include 'category_menu.html.twig' with {key :areaCateArr} %}
-            <div id="item_detail">
-                <div class="image">
-                    <img src="{{constant('buy\\Bootstrap::ENTRY_URL')}}images/{{itemData.image}}"alt="{{itemData.item_name}}">
-                </div>    
-                <div class="detail">
-                    <dl>
-                        <dt>商品名</dt>
-                        <dd>{{itemData.item_name}}</dd>
-                        <dt>詳細</dt>
-                        <dd>{{itemData.detail}}</dd>
-                        <dt>価格</dt>
-                        <dd>&yen;{{itemData.price|number_format(0,'.',',')}}</dd>
-                        {# <input type="hidden" name="item_id" id="item_id" value="{{itemData.item_id}}">
-                        <input type="hidden" name="mem_id" id="mem_id" value="{{mem_id}}"> #}
-                        
-                    </dl>
-                </div>
-                <form method="post" action="cart.php">
-                    <div class="cart_in">
-                        <input type="hidden" name="item_id" id="item_id" value="{{itemData.item_id}}">
-                        <input type="hidden" name="mem_id" id="mem_id" value="{{mem_id}}">
-                        <input type="button" name ="back" onclick="location.href='http://localhost/DT/buy/list.php'"value="一覧に戻る"> 
-                        <input type="submit" name = "cart_in" value="ショッピングカートへ入れる" id="cart_in">
-                        {% if mem_id | length > 0 %}
-                            {% if item_idCheck == 1 %} 
-                                <p><label><input type="checkbox" name="favorite[]" value="1" id="send" checked="checked">お気に入り</label><br></p>
-                            {% else %} 
-                                <p><label><input type="checkbox" name="favorite[]" value="1" id="send">お気に入り</label><br></p>
-                            {% endif %}
-                        {% endif %} 
-                        <script src ="{{constant('buy\\Bootstrap::APP_URL')}}js/ajax.js"></script>
+        <div id="wrapper1" style="background: #990000;"  style="color:white">
+            <strong><span style="color: #FFFFFF;"><font size="5">ふるさとをチョイス</font></span></strong>
+        </div>
+        <input type="hidden" name="entry_url" value="{{constant('buy\\Bootstrap::ENTRY_URL')}}"id="entry_url">
+        <p>
+            <div id="wrapper">
+                {% include 'category_menu.html.twig' %}
+                <div id="item_detail">
+                    <div class="image">
+                        <img src="{{constant('buy\\Bootstrap::ENTRY_URL')}}images/{{itemData.image}}"alt="{{itemData.item_name}}">
+                    </div>    
+                    <div class="detail">
+                        <dl>
+                            <dt>商品名</dt>
+                            <dd>{{itemData.item_name}}</dd>
+                            <dt>詳細</dt>
+                            <dd>{{itemData.detail}}</dd>
+                            <dt>価格</dt>
+                            <dd>&yen;{{itemData.price|number_format(0,'.',',')}}</dd>
+                            {# <input type="hidden" name="item_id" id="item_id" value="{{itemData.item_id}}">
+                            <input type="hidden" name="mem_id" id="mem_id" value="{{mem_id}}"> #}
+                            
+                        </dl>
                     </div>
-                </form> 
-            </div>   
-        </div>  
+                    <form method="post" action="./cart.php?item_id={{itemData.item_id}}">
+                        <div class="cart_in">
+                            <input type="hidden" name="item_id" id="item_id" value="{{itemData.item_id}}">
+                            <input type="hidden" name="mem_id" id="mem_id" value="{{mem_id}}">
+                            <input type="button" name ="back" onclick="location.href='http://localhost/DT/buy/list.php'"value="一覧に戻る"> 
+                            <input type="submit" name = "cart_in" value="ショッピングカートへ入れる" id="cart_in">
+                            {% if mem_id | length > 0 %}
+                                {% if item_idCheck == 1 %} 
+                                    <p><label><input type="checkbox" name="favorite[]" value="1" id="send" checked="checked">お気に入り</label><br></p>
+                                {% else %} 
+                                    <p><label><input type="checkbox" name="favorite[]" value="1" id="send">お気に入り</label><br></p>
+                                {% endif %}
+                            {% endif %} 
+                            <script src ="{{constant('buy\\Bootstrap::APP_URL')}}js/ajax.js"></script>
+                        </div>
+                    </form> 
+                </div>   
+            </div>
+        </p> 
     </body> 
 </html>                       
