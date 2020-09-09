@@ -10,10 +10,13 @@
         </div> 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link href="{{constant('buy\\Bootstrap::APP_URL')}}css/shopping5.css"
-        rel="stylesheet">
+        <link href="{{constant('buy\\Bootstrap::APP_URL')}}css/shopping5.css" rel="stylesheet">
     </head>
     <body>
+        {# トークン #}
+        <form method="post" action="cart.php">
+            <input name="chkno" type="hidden" value={{chkno}}>
+        </form>
         <div id="wrapper1">
             <div id="cart_list">
                 <p>ショッピングカート</p>
@@ -41,4 +44,4 @@
             </div>                                            
         </div>    
     </body>
-</html>            
+</html>               
