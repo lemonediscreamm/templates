@@ -1,41 +1,51 @@
+{# お問い合わせの確認画面 #}
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>確認画面</title>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<link href="style1.css" rel="stylesheet"> 
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>確認画面</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{constant('login\\Bootstrap::APP_URL')}}css/style_contact.css" rel="stylesheet">
+    </head>
 <body>
-<div class="container">
-    <h2 class="">お問い合わせフォーム</h2>
-    <form id="form" method="post" action="send.php">
-    <div class="form-group">
-        <label for="name">お名前（必須)：</label>
-        <td>{{arr.name}}</td>
+    <div id="wrapper" style="background: #990000;"  style="color:white">
+        <strong><span style="color: #FFFFFF;"><font size="5">ふるさとをチョイス</font></span></strong>
     </div>
-    <div class="form-group">
-        <label for="email">Email（必須)：</label>
-        <td>{{arr.email}}</td>
+    <div class="container">
+        <h2 class="">お問い合わせフォーム確認画面</h2>
+        <form id="form" method="post" action="send.php">
+            <p class ="text">
+                <div class="form-group">
+                    <th><label for="name">お名前（必須)：</label></th>
+                    <th><td>{{arr.name}}</td></th>
+                </div> 
+                <div class="form-group">
+                    <th><label for="email">Email（必須)：</label></th>
+                    <th><td>{{arr.email}}</td></th>
+                </div>
+                <div class="form-group">
+                    <label for="tel">お電話番号（半角英数字）：</label>
+                    <td>{{arr.tel}}</td>
+                </div>
+                <div class="form-group">
+                    <label for="subject">件名（必須）：</label>
+                    <td>{{arr.subject}}</td>
+                </div>
+                <div class="form-group">
+                    <label for="body">お問い合わせ内容（必須）：</label>
+                    <td>{{arr.body}}</td>
+                </div>
+            </p>
+            <p>
+                <div id="wrapper1"> 
+                    <button type="button" onclick='location.href="http://localhost/DT/buy/list.php"'>一覧戻る</button>
+                    <input type="button" name="back" value="もう一度編集する" onclick="history.back(); return false;">
+                    <button name="submitted" type="submit" class="btn btn-primary">送信</button>
+                </div>    
+            </p>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="tel">お電話番号（半角英数字）：</label>
-        <td>{{arr.tel}}</td>
-    </div>
-    <div class="form-group">
-        <label for="subject">件名（必須）：</label>
-        <td>{{arr.subject}}</td>
-    </div>
-    <div class="form-group">
-        <label for="body">お問い合わせ内容（必須）：</label>
-        <td>{{arr.body}}</td>
-    </div>
-    <p><button type="button" onclick='location.href="http://localhost/DT/buy/list.php"'>一覧戻る</button>
-    <input type="button" name="back" value="もう一度編集する" onclick="history.back(); return false;">
-    <button name="submitted" type="submit" class="btn btn-primary">送信</button></p>
-  </form>
-</div>
 </body>
 </html>
